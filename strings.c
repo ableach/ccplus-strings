@@ -34,7 +34,7 @@ int main ()
 int countCharsInString(char stringToCount[])
 {
     int stringPosition = 0;
-    char charSlice;
+
     while ( stringToCount[stringPosition] != '\0' ) {
         stringPosition++;
     }
