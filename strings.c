@@ -4,11 +4,14 @@ Date: 04/01/2021
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 int countCharsInString(char stringToCount[]);
 char* joinTwoStrings(char string1[], char string2[], char concatenatedString[]);
 bool areStringsEqual(char string1[], char string2[]);
+char* reverseString( char stringToReverse[], char reversedString[] );
+char* reverseStringFromKeyboard( char reversedString[] );
 
 int main ()
 {
@@ -20,6 +23,7 @@ int main ()
     // when exiting called function. This is because allocated memory for local var is released on exit 
     // as it is declared on stack local to function.
     char concatenatedString[100]; 
+    char reversedString[100]; 
     
     printf("Length of %s = %d\n", sampleString, countCharsInString(sampleString));
     printf("Concatenated string = %s\n",joinTwoStrings(sampleString, sampleString2, concatenatedString));
@@ -28,6 +32,10 @@ int main ()
     } else {
         printf("Strings %s and %s are not equal\n",sampleString, sampleString2);
     }
+
+    char stringToReverse[100];
+    fgets(stringToReverse, sizeof stringToReverse, stdin);
+    printf("%s\n", reverseString(stringToReverse,reversedString));
     return 0;
 }
 
@@ -74,3 +82,28 @@ bool areStringsEqual(char string1[], char string2[]) {
 
     return result;
 }
+
+char* reverseString( char stringToReverse[], char reversedString[] ) {
+    int stringLength = countCharsInString(stringToReverse);
+
+    int j=stringLength-1;
+    for ( int i=0; i<stringLength; i++ ) {
+        reversedString[i] = stringToReverse[j--];
+    }
+    reversedString[stringLength+1] = '\0';
+
+    return (char*)reversedString;
+
+}
+
+/*void bubbleSort() {
+
+    for ( i=0; i<3; i++ ) {
+        if () {
+
+        }
+    }
+
+    return;
+
+}*/
