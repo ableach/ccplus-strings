@@ -120,7 +120,7 @@ void bubbleSort() {
         int innerLoopLimit = itemCount - 1 - i; // last item is now in correct position so don't compare again
         for ( int j=0; j<innerLoopLimit; j++ ) { // ...by comparing with each of the others
             nextItem = j+1;
-            if ( nextItem < itemCount && words[j][0] > words[nextItem][0] ) {
+            if ( nextItem < itemCount && strcmp(words[j], words[nextItem])>0 ) {
                 strcpy(tempWord, words[nextItem]);
                 strcpy(words[nextItem], words[j]);
                 strcpy(words[j], tempWord);
