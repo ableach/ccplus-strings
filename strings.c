@@ -6,17 +6,21 @@ Date: 04/01/2021
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 int countCharsInString(char stringToCount[]);
 char* joinTwoStrings(char string1[], char string2[], char concatenatedString[]);
 bool areStringsEqual(char string1[], char string2[]);
 char* reverseString( char stringToReverse[], char reversedString[] );
 char* reverseStringFromKeyboard( char reversedString[] );
+void bubbleSort();
 
 int main ()
 {
+    bubbleSort();
+
     char sampleString[] = {"gerbil"};
-    char sampleString2[] = {"gerbil"};
+    char sampleString2[] = {"tabulature"};
 
     // declare result string here so that it can be returned else we get
     // "Warning - address of stack memory associated with local variable 'concatenatedString' returned"
@@ -34,8 +38,8 @@ int main ()
     }
 
     char stringToReverse[100];
-    fgets(stringToReverse, sizeof stringToReverse, stdin);
-    printf("%s\n", reverseString(stringToReverse,reversedString));
+    scanf("%s",stringToReverse);
+    printf("reversed string: %s\n", reverseString(stringToReverse,reversedString));
     return 0;
 }
 
@@ -85,7 +89,6 @@ bool areStringsEqual(char string1[], char string2[]) {
 
 char* reverseString( char stringToReverse[], char reversedString[] ) {
     int stringLength = countCharsInString(stringToReverse);
-
     int j=stringLength-1;
     for ( int i=0; i<stringLength; i++ ) {
         reversedString[i] = stringToReverse[j--];
@@ -96,14 +99,40 @@ char* reverseString( char stringToReverse[], char reversedString[] ) {
 
 }
 
-/*void bubbleSort() {
+void bubbleSort() {
 
-    for ( i=0; i<3; i++ ) {
-        if () {
+    int itemCount = 0;
+    char tempWord[20];
+    char words[10][20];
 
+    printf("\nBubble Sort\n");
+    printf("===========\n");
+    printf("How many words do you wish to sort?: ");
+    scanf("%d",&itemCount);
+
+    for ( int i = 0; i<itemCount; i++ ) {
+        printf("Enter word %d: ",i);
+        scanf("%s:",words[i]);
+    }
+
+    int nextItem = 0;
+    for ( int i=0; i<itemCount-1; i++ ) { // consider moving each item...
+        int innerLoopLimit = itemCount - 1 - i; // last item is now in correct position so don't compare again
+        for ( int j=0; j<innerLoopLimit; j++ ) { // ...by comparing with each of the others
+            nextItem = j+1;
+            if ( nextItem < itemCount && words[j][0] > words[nextItem][0] ) {
+                strcpy(tempWord, words[nextItem]);
+                strcpy(words[nextItem], words[j]);
+                strcpy(words[j], tempWord);
+            }
         }
+    }
+
+    printf("\nSorted list:\n");
+    for ( int i=0; i<itemCount; i++ ) {
+        printf("%d: %s\n",i,words[i]);
     }
 
     return;
 
-}*/
+}
